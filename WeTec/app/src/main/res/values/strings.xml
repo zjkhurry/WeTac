@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">WeTac</string>
+    <string name="button1">Button</string>
+    <string name="DC">Duty Cycle</string>
+    <string name="IT">Intensity</string>
+    <string name="FQ">Frequency</string>
+    <string name="Slogan">WeTac Glove @ Yu Lab</string>
+
+</resources>
