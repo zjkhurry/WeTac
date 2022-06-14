@@ -1,0 +1,223 @@
+# Change Log
+All notable changes to “Obi - Advanced softbodies for Unity” will be documented in this file.
+
+## [6.3]
+
+### Added
+- Redone softbody blueprints generation from scratch: surface and volume particle generation can be combined, with automatic cluster placement.
+- Full-body volumetric softbodies: a character's skeleton can be used to drive softbody particle movement.
+- ObiSoftbodySkinner now supports up to 255 bones per vertex, and supports per-vertex blending between the original skinning and particle skinning.
+- ObiSoftbodySkinner can be enabled/disabled.
+- Built-in support for applying solver gravity in world-space.
+
+### Fixed
+- Bug in attachments: prefab modifications were not being applied to the component.
+- Slight reduction in solver memory allocation.
+- Object disposed exception when using contact callbacks with a non-visible solver.
+
+### Removed
+- ObiSoftbodyVolumeBlueprint has been removed.
+
+## [6.2]
+
+#IMPORTANT: If updating from an older version, you’ll need to readjust collision filtering in your scenes.
+Phase-based collision filtering has been replaced by mask/categroy based system.
+
+### Added
+- New spatial query API, that allows to perform efficient distance, overlap and raycast queries.
+
+### Changed
+- Collision phase filtering has been replaced by a category/mask system. If you upgrade existing projects to Obi 6.2, you will have to set up categories and masks appropiately.
+
+
+## [6.1]
+
+### Added
+- Exposed per-constraint best linear transform matrix and plastic deformation matrix in shape matching constraints (linearTransform and plasticDeformation arrays in each batch).
+- New DeformationGradient sample scene, that maps cluster deformation to vertex colors.
+
+### Changed
+- Decreased minimum error in distance fields to 1e-07
+
+### Fixed
+- Bug in Oni backend: collision stickiness resulted in rapid particle separation from the collision surface.
+- Bug that caused NaN velocity assignments to rigidbodies after removing all actors from a solver.
+
+## [6.0.2]
+
+### Fixed
+- Performance issues when enabling particle visualization in the blueprint editor while having more than one scene view open.
+- Sometimes the particle visualization in the blueprint editor wasn't updated after clicking Generate(), requiring to deactivate/reactivate visualization. This is fixed now.
+
+### Added
+- The ObiSoftbodySkinner component now checks if the renderer's mesh is readable, if not the case it asks to fix it for you automatically.
+
+## [6.0.1]
+
+### Fixed
+- Bug in Burst backend, resulting in InvalidOperationException when enabling Burst safety checks.
+- Bug in ObiSolver that caused particleToActor array entries to be null.
+
+## [6.0]
+
+### Added
+- Predictive variable-step constraint solving that makes syncing Unity's physics no longer necessary when using substeps.
+- Amount of CCD is now adjustable per-solver.
+- Collision margin is now adjustable per-solver.
+- Bend and bend/twist constraints now support plasticity.
+- One-sided collision detection between particles. Particles with one-sided collision detection will always project penetrating particles to the side defined by their associated normal.
+
+### Fixed
+- Bug in dynamic particle attachments that would case colliders parented under a solver to lose their attachments upon enabling/reenabling a solver.
+
+### Changed
+- Contacts "particle" and "other" have been renamed to "bodyA" and "bodyB". bodyB might be a simplex or collider index, depending on the contact type.To access
+particle indices from simplex indices, use the solver.simplices array.
+
+
+## [5.6.2]
+
+### Fixed
+- Missed collisions using certain meshes for MeshColliders, due to a bug in bounding interval hierarchy generation.
+
+## [5.6.1]
+
+### Fixed
+- Bug in Burst backend: solver bounding box size was typically underestimated.
+- Bug in Burst backend: when using volume constraints: "InvalidOperationException: The NativeContainer ApplyVolumeConstraintsBatchJob.particleIndices has not been assigned or constructed"
+- Bug in Burst backend: not releasing native arrays when empty solvers -with zero actors in them- are present in the scene.
+- Bug in Oni backend: volume constraints not working properly when multiple actors are present in the solver.
+- Fixed crash when using ObiLateUpdater or ObiLateFixedUpdater with the Burst backend.
+- Reduced GC allocation in dynamic particle attachments.
+- Fixed bug in Skin constraints, that caused them to fail restricting particle movement in certain circumstances.
+
+### Changed
+- Updated Oni iOS library to XCode 12.1. Make sure to use XCode 12.1 or up to build for iOS when using the Oni backend.
+- ObiKinematicVelocities component has been removed. Its functionality is now built into the engine, and automatically used for kinematic rigidbodies.
+
+### Added
+- Sample ObiContactDispatcher component, that will call custom enter/stay/exit contact events.
+- Support for multiple solvers in sample script in ObiContactGrabber.
+- Added util LookAroundCamera component.
+
+## [5.6]
+
+### Added
+- Faster SDF generation.
+- New sample scene.
+
+### Fixed
+- Bug that causes out of bounds access when dinamically adding/removing colliders at runtime.
+- Bug that prevented stitch constraints from working first time they were enabled.
+- Offset in particle selection brush on high density screens.
+
+### Changed
+- Constraint batches of multiple actors are now merged together. This greatly reduces the amount of dispatched jobs and improves performance on both backends.
+- Colliders no longer have a "use distance fields" boolean value, they will always use the SDF as long as they have one.
+
+## [5.5]
+
+### Added
+- Backend system: abstracts the underlying particle-based physics engine used. To the native, built-in engine (Oni), we have added a Burst-based implementation that
+will run on all platforms supported by Burst.
+
+## [5.4]
+
+### Fixed
+- Bug that caused a crash when using Obi in conjunction with Mirror networking system (NetworkIdentity component).
+- Bug that could cause a crash when disabling an actor under a disabled solver.
+
+### Changed
+- Recompiled iOS libraries using XCode 11.3.1, to circumvent bitcode compatibility issues now that XCode 11.4 and up have a bug that cause linking against Obi to fail. 
+
+
+## [5.3]
+
+### Added
+- Greatly increased numerical precision for rigidbody interaction when solvers are far away from the origin.
+- 2D colliders now span infinitely in the Z axis.
+
+### Fixed
+- Issue in the ObiStitcher editor that picked up incorrect particles when adding stitches.
+- Issue that caused a 1-frame delay for collider geometry parented inside a solver.
+- Issue in ObiParticleDragger that caused incorrect behavior with multiple solvers.
+- Bug in particle advection, that assumed diffuse particle positions to be expreseed in world space. Now advection works correctly
+for solvers not positioned at 0,0,0.
+
+## [5.2]
+
+### Added
+- Exposed softbody shape matching parameters as public properties (plastic yield, creep, etc)
+- Function to reset particle positions orientations and and velocities in an actor (actor.ResetParticles())
+
+### Fixed
+- Issue with inertia rotations, that caused wrong inertia tensors for complex compound colliders.
+- Issue in particle attachments, that forced to call Bind() manually after changing their target or particle group at runtime.
+
+
+## [5.1]
+
+### Added
+- Smooth initial overlap resolution by using clamped depenetration velocity.
+- Actors now automatically create a solver root when editing them in prefab mode.
+- Error message in the blueprint editor UI when the input mesh is not readable, along with a "Fix now" button for convenience.
+
+### Fixed
+- Bug that caused solvers with no actors in their hierarchy to freeze Unity when updated by a fixed updater.
+- Bug that prevented ObiSoftbodySkinner from being skinned at runtime.
+- Bug that prevented multiple colliders in the same object to be notified of transform changes.
+
+## [5.0]
+
+#IMPORTANT: You’ll need to re-create all your 4.x ObiSoftbody components. Data serialization and workflows are significantly different from previous versions.
+
+### Changed
+- Introduced blueprints: particle/constraint object representations are now stored in assets called "blueprints" (as opposed to being stored in the actor itself, as in previous versions). This improves
+memory consumption, editor performance, completely separates data from the runtime components that operate on it, and enables easier and faster workflow.
+- Simplified underlying engine, constraints are grouped in batches using graph coloring for optimal parallelism.
+- Unified handles and pin constraints as "attachments".
+- Pin and distance constraints now correctly report forces in Newtons.
+- Unitless "Stiffness" parameters have been replaced by "Compliance" parameters in most constraint types, expressed in Newtons/meter.
+
+### Added
+- Added voxel-based particle sampling method. Note that this will generate way more particles than the classic surface sampling. Use it when surface sampling of your mesh just isn't enough.
+
+### Removed
+- World space/local space simulation. Simulation is now always performed in solver space.
+- Solvers no longer have a maxParticles attribute. They dynamically change their capacity at runtime.
+
+### Fixed
+- Crash in certain iOS devices using the A12 cpu.
+
+
+## [4.1]
+
+### Added
+- Bake Mesh functionality that allows to generate a mesh asset from a deformed softbody.
+- More accurate collision/contact model, using staggered projections.
+- Approximate shock propagation for particle contacts. This makes particle stacking easier and stabler. A new parameter has been added to the solver that controls the amount of shock propagation.
+- Split material friction into static and dynamic friction.
+- Added rolling contacts w/ rolling friction. These are slightly more expensive than regular contacts. Can be controlled on a per-collision material basis.
+- Added ObiInstancedParticleRenderer, allows to draw particles as instances of an arbitrary mesh (requires GPU instancing).
+- Particle-particle collision callbacks (solver.OnParticleCollision)
+
+### Changed
+- Moved softbody skinning to its own component, ObiSoftbodySkinner. This allows multiple meshes to be skinned to the same softbody particles.
+- More reliable, higher precision algorithm for distance field generation. Specially noticeable in sharp corners/crevices.
+
+### Fixed
+- Bug that caused spurious torque when initializing a softbody at non-zero rotation.
+- Bug that caused mesh colliders with negative thickness to crash.
+
+## [4.0.2]
+
+### Changed
+- Switched the Windows compiler to Clang/LLVM, resulting in a huge performance improvement.
+
+### Fixed
+- Null ref exception when copying a ObiCloth component.
+- Issue with pin constraints overshooting when solver set to world space mode.
+- Issue that prevented pin constraints being torn.
+
+## [4.0.0] - 2018-12-2
+- Initial release.
