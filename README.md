@@ -91,3 +91,10 @@ This circuit is designed by easyEDA, the easyEDA project files and Gerber files 
 
 ### 4.3. Usage
 This firmware is used for TI CC2640R2FRSMR, build it with CCS and flash it into the MCU through the XDS100V3 debugger. After successfully flashing the program, the circuit can be powered by a 4.2V Li-ion battery. In order for the hardware to work properly, it needs to be paired with the previously mentioned Android App.
+
+## Cite
+If you find this useful, cite this paper below
+```
+Yao, K. et al. Encoding of tactile information in hand via skin-integrated wireless haptic interface. Nat. Mach. Intell. xxx, xxx (2022).
+```
+Thank you !!
