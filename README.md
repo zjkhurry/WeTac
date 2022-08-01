@@ -1,5 +1,5 @@
 ## WeTac control and monitoring code and Matlab data processing code
-This is the source code for "Decoding of tactile information in hand via skin-integrated wireless haptic interface" to be published on *Nature Machine Intelligence*.
+This is the source code for "Encoding of tactile information in hand via skin-integrated wireless haptic interface" to be published on *Nature Machine Intelligence*.
 
 ## 1. Android app code
 ### 1.1. System requirement
