@@ -1,0 +1,74 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Yao
+    given-names: Kuanming
+    orcid: https://orcid.org/0000-0001-8744-8892
+  - family-names: Zhou
+    given-names: Jingkun
+    orcid: https://orcid.org/0000-0001-5394-4388
+  - family-names: Huang
+    given-names: Qingyun
+    orcid: https://orcid.org/0000-0001-8738-4382
+  - family-names: Wu
+    given-names: Mengge
+  - family-names: Yiu
+    given-names: Chun Ki
+  - family-names: Li
+    given-names: Jian
+  - family-names: Huang
+    given-names: Xingcan
+  - family-names: Li
+    given-names: Dengfeng
+  - family-names: Su
+    given-names: Jingyou
+  - family-names: Hou
+    given-names: Senlin
+  - family-names: Liu
+    given-names: Yiming
+  - family-names: Huang
+    given-names: Ya
+  - family-names: Tian
+    given-names: Ziyan
+  - family-names: Li
+    given-names: Jiyu
+  - family-names: Li
+    given-names: Hu
+  - family-names: Shi
+    given-names: Rui
+  - family-names: Zhang
+    given-names: Binbin
+  - family-names: Zhu
+    given-names: Jingyi
+  - family-names: Wong
+    given-names: Tsz Hung
+  - family-names: Jia
+    given-names: Huiling
+  - family-names: Gao
+    given-names: Zhan
+  - family-names: Gao
+    given-names: Yuyu
+  - family-names: Zhou
+    given-names: Yu
+  - family-names: Park
+    given-names: Wooyoung
+  - family-names: Song
+    given-names: Enming
+  - family-names: Han
+    given-names: Mengdi
+  - family-names: Zhang
+    given-names: Haixia
+  - family-names: Yu
+    given-names: Junsheng
+  - family-names: Wang
+    given-names: Lidai
+    orcid: https://orcid.org/0000-0003-3463-0740
+  - family-names: Li
+    given-names: Wen Jung
+    orcid: https://orcid.org/0000-0001-9616-6213
+  - family-names: Yu
+    given-names: Xinge
+    orcid: https://orcid.org/0000-0003-0522-1171
+title: Encoding of tactile information in hand via skin-integrated wireless haptic interface
+version: V0.0.2
+date-released: 2022-09-01
