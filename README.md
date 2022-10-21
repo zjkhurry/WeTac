@@ -95,6 +95,6 @@ This firmware is used for TI CC2640R2FRSMR, build it with CCS and flash it into 
 ## Cite
 If you find this useful, cite this paper below
 ```
-Yao, K. et al. Encoding of tactile information in hand via skin-integrated wireless haptic interface. Nat. Mach. Intell. xxx, xxx (2022).
+Yao, Kuanming, et al. "Encoding of tactile information in hand via skin-integrated wireless haptic interface." Nature Machine Intelligence (2022): 1-11.
 ```
 Thank you !!
